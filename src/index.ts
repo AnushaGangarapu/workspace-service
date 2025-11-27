@@ -16,15 +16,28 @@ const PORT: number = Number(process.env.PORT) || 5000;
 // Connect DB
 connectDatabase();
 
-// CORS CONFIG — FINAL VERSION
-app.use(cors({
-  origin: [
-    "http://localhost:3000",
-    "https://workspacebooking.netlify.app",
-    "https://workspace-service.vercel.app"
-  ],
-  credentials: true,
-}));
+// CORS FIX — DYNAMIC ORIGIN
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://workspacebooking.netlify.app"
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // Allow requests with no origin — like mobile apps / curl
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      } else {
+        console.log("❌ CORS BLOCKED:", origin);
+        return callback(new Error("Not allowed by CORS"), false);
+      }
+    },
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 
