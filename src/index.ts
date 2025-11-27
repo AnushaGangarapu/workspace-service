@@ -6,6 +6,7 @@ import roomRoutes from './routes/roomRoutes';
 import bookingRoutes from './routes/bookingRoutes';
 import analyticsRoutes from './routes/analyticsRoutes';
 
+
 dotenv.config();
 
 const app: Application = express();
