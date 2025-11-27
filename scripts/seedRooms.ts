@@ -14,7 +14,7 @@ const rooms = [
 
 const seedRooms = async () => {
   try {
-    const mongoUri = 'mongodb+srv://anushagangarapu7_db_user:Anu321%4056@cluster0.m5u6raa.mongodb.net/workspace-booking'
+    const mongoUri = `${process.env.MONGODB_URI}`
     await mongoose.connect(mongoUri);
     console.log('Connected to MongoDB');
     
