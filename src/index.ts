@@ -17,7 +17,13 @@ const PORT: number = Number(process.env.PORT) || 5000;
 connectDatabase();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:3000",
+    "https://workspace-service-rmi1w9bpj-anushas-projects-15d95fe0.vercel.app/api",  // your React domain
+  ],
+  credentials: true,
+}));
 app.use(express.json());
 
 // Health route
