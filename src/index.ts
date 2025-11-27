@@ -16,44 +16,17 @@ const PORT: number = Number(process.env.PORT) || 5000;
 // Connect DB
 connectDatabase();
 
-// -----------------------
-// ✅ CORS CONFIG
-// -----------------------
-
+// CORS CONFIG — FINAL VERSION
 app.use(cors({
-  origin: (origin, callback) => {
-    const allowedOrigins = [
-      "http://localhost:3000",
-      "https://workspacebooking.netlify.app"
-    ];
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("CORS Not Allowed"));
-    }
-  },
+  origin: [
+    "http://localhost:3000",
+    "https://workspacebooking.netlify.app",
+    "https://workspace-service.vercel.app"
+  ],
   credentials: true,
 }));
 
-// -----------------------
-// ✅ CORS HEADERS
-// -----------------------
-app.use((req: Request, res: Response, next: NextFunction) => {
-  res.header("Access-Control-Allow-Origin", req.headers.origin || "*");
-  res.header("Access-Control-Allow-Credentials", "true");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
-  }
-
-  next();
-});
-
-// -----------------------
 app.use(express.json());
-// -----------------------
 
 // Health route
 app.get('/health', (req: Request, res: Response) => {
