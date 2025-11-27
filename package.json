@@ -24,6 +24,7 @@
     "@types/mongoose": "^5.11.97",
     "@types/node": "^20.19.25",
     "@types/uuid": "^11.0.0",
+    "@vercel/node": "^5.5.13",
     "nodemon": "^3.1.11",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
